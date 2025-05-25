@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COS40007 Vegemite AI</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      main {
+        display: flex;
+      }
+      #FFTE_Inputs, #TFE_Inputs {
+        display: flex;
+        flex-direction: column;
+      }
+      .slider-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to COS40007 Vegemite AI</h1>
+      <p>This is a simple HTML page for the Vegemite AI project.</p>
+      <p>Feel free to explore and learn more about the project!</p>
+    </header>
+
+    <main>
+      <section id="input_section">
+        <div>
+          <h3>Batch & General Info</h3>
+        </div>
+        <div id="FFTE">
+          <h3>FFTE (First Flash Evaporator) Settings</h3>
+          <div id="FFTE_Inputs">
+            <div class="slider-container">
+              <label for="feed_solids">Feed Solids</label>
+              <input id="feed_solids" type="range" min="0" max="100" value="50" />
+              <span id="feed_solids_value">50</span>
+            </div>
+            <div class="slider-container">
+              <label for="production_solids">Production Solids</label>
+              <input id="production_solids" type="range" min="0" max="100" value="50" />
+              <span id="production_solids_value">50</span>
+            </div>
+            <div class="slider-container">
+              <label for="steam_solids">Steam Solids</label>
+              <input id="steam_solids" type="range" min="0" max="100" value="50" />
+              <span id="steam_solids_value">50</span>
+            </div>
+            <div class="slider-container">
+              <label for="steam_pressure">Steam Pressure</label>
+              <input id="steam_pressure" type="range" min="0" max="100" value="50" />
+              <span id="steam_pressure_value">50</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>TFE (Thin Film Evaporator) Settings</h3>
+          <div id="TFE_Inputs">
+            <div class="slider-container">
+              <label for="out_flow">Out flow</label>
+              <input id="out_flow" type="range" min="0" max="100" value="50" />
+              <span id="out_flow_value">50</span>
+            </div>
+            <div class="slider-container">
+              <label for="TFE_production_solids">Production Solids</label>
+              <input id="TFE_production_solids" type="range" min="0" max="100" value="50" />
+              <span id="TFE_production_solids_value">50</span>
+            </div>
+            <div class="slider-container">
+              <label for="vacuum_pressure">Vacuum Pressure</label>
+              <input id="vacuum_pressure" type="range" min="0" max="100" value="50" />
+              <span id="vacuum_pressure_value">50</span>
+            </div>
+            <div class="slider-container">
+              <label for="TFE_steam_solids">Steam Pressure</label>
+              <input id="TFE_steam_solids" type="range" min="0" max="100" value="50" />
+              <span id="TFE_steam_solids_value">50</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Extract Tank Settings</h3>
+        </div>
+      </section>
+
+      <section id="display_section"></section>
+    </main>
+
+    <footer>
+      <p>&copy; 2023 Vegemite AI Project</p>
+    </footer>
+
+    <script>
+      // Add slider value display functionality
+      const sliders = [
+        'feed_solids', 'production_solids', 'steam_solids', 'steam_pressure',
+        'out_flow', 'TFE_production_solids', 'vacuum_pressure', 'TFE_steam_solids'
+      ];
+
+      sliders.forEach(id => {
+        const slider = document.getElementById(id);
+        const valueDisplay = document.getElementById(id + '_value');
+
+        // Initialize display
+        valueDisplay.textContent = slider.value;
+
+        // Update display on input
+        slider.addEventListener('input', () => {
+          valueDisplay.textContent = slider.value;
+        });
+      });
+    </script>
+  </body>
+</html>
