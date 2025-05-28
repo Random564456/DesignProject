@@ -26,11 +26,37 @@ class Settings(BaseModel):
     vacuum_pressure: float
     TFE_steam_solids: float
 
-LATENT_DIM = 23  
+class Sensors(BaseModel):
+    part: float
+    extract_tank_level: float
+    ffte_discharge_density: float
+    ffte_discharge_solids: float
+    ffte_feed_flow_rate_pv: float
+    ffte_feed_solids_pv: float
+    ffte_heat_temperature_1: float
+    ffte_heat_temperature_2: float
+    ffte_heat_temperature_3: float
+    ffte_production_solids_pv: float
+    ffte_steam_pressure_pv: float
+    tfe_input_flow_pv: float
+    tfe_level: float
+    tfe_motor_current: float
+    tfe_motor_speed: float
+    tfe_out_flow_pv: float
+    tfe_production_solids_pv: float
+    tfe_production_solids_density: float
+    tfe_steam_pressure_pv: float
+    tfe_steam_temperature: float
+    tfe_tank_level: float
+    tfe_temperature: float
+    tfe_vacuum_pressure_pv: float
+
+LATENT_DIM = 8
 
 generator_model = load_generator_model()
 
 @app.post("/predict")
+# TODO: Change this to sensors 
 async def predict_settings(settings: Settings):
     try:
         # Convert the settings to a list - this matches the 8 inputs expected
@@ -44,6 +70,11 @@ async def predict_settings(settings: Settings):
             settings.vacuum_pressure / 100.0,
             settings.TFE_steam_solids / 100.0
         ]
+
+        # TODO: Uncomment this to normalize all sensors
+        # input_values = []
+        # for sensor in sensors:
+        #     input_values.append(sensor / 100.0)  
         
              
         sensors_array = np.array(input_values).reshape(1, -1).astype(np.float32)
